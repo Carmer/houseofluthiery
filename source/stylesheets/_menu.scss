@@ -1,0 +1,155 @@
+@import "compass/css3";
+
+$dark: #212121;
+$light: #efefef;
+$color: #b3e5fc;
+
+@mixin btn($left, $top) {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  top: $top;
+  left: $left;
+  transition-duration: 0.3s;
+}
+
+@mixin icon($height, $width) {
+  transition-duration: 0.3s;
+  position: absolute;
+  height: $height;
+  width: $width;
+  top: 33px;
+  background-color: $dark;
+}
+
+@mixin icon-before($height, $width, $top) {
+  transition-duration: 0.3s;
+  position: absolute;
+  width: $width;
+  height: $height;
+  background-color: $dark;
+  content: "";
+  top: $top;
+}
+
+@mixin icon-after($height, $width, $top) {
+  transition-duration: 0.3s;
+  position: absolute;
+  width: $width;
+  height: $height;
+  background-color: $dark;
+  content: "";
+  top: $top;
+}
+
+@mixin menu-before($left) {
+  list-style-type: none;
+  transition-duration: 0.3s;
+  position: absolute;
+  width: 75px;
+  height: 300px;
+  content: "";
+  top: 60px;
+  left: $left;
+}
+
+@mixin menu-after($left) {
+  list-style-type: none;
+  transition-duration: 0.3s;
+  position: absolute;
+  width: 75px;
+  height: 300px;
+  content: "";
+  top: 60px;
+  left: $left;
+}
+
+@mixin icon-circle($height, $width) {
+  transition-duration: 0.3s;
+  position: absolute;
+  height: $height;
+  width: $width;
+  top: 11px;
+  border-radius: 100%;
+  background: transparent;
+  border: 4px solid black;
+  left: -14px;
+}
+
+body {
+  background-color: $light;
+  color: $dark;
+}
+
+.container {
+  position: relative;
+  max-width: 420px;
+  width: 100%;
+}
+
+h1, h2, p {
+ text-align: center;
+}
+
+.btn14{
+  @include btn(30px, 8px);
+
+  .icon-circle {
+    @include icon-circle(40px, 40px);
+    &:hover {
+      background: #fff;
+    }
+  }
+
+  .icon {
+    @include icon(4px, 20px);
+    border-radius: 4px;
+
+    &:before{
+      @include icon-before(4px, 20px, -10px);
+      border-radius: 4px;
+    }
+
+    &:after{
+      @include icon-after(4px, 20px, 10px);
+      border-radius: 4px;
+    }
+  }
+
+  #menu {
+    @include menu-before(-1000px)
+  }
+
+  &.open {
+    .icon-circle {
+      background: $light;
+    }
+    .icon {
+      transition-duration: 0.3s;
+      background: transparent;
+
+      &:before{
+        transform: rotateZ(45deg) scaleX(1.25) translate(6.5px, 6.5px);
+      }
+
+      &:after{
+        transform: rotateZ(-45deg) scaleX(1.25) translate(6px, -6px);
+      }
+    }
+
+    #menu{
+      @include menu-after(-59px);
+
+      li {
+        margin: 15px;
+      }
+    }
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+a {
+  color: $dark;
+}
